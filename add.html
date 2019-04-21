@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add item</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container text-center" style="margin-top: 20px;">
+      <form>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            id="itemToAdd"
+            placeholder="Somthing to do"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <script>
+      const electron = require("electron");
+      const { ipcRenderer } = electron;
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const item = document.querySelector("#itemToAdd").value;
+        ipcRenderer.send("item:add", item);
+      });
+    </script>
+  </body>
+</html>
